@@ -14,7 +14,7 @@ app.use(cors(corsOptions));
 app.use(bodyparser.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to epathshala application." });
+  res.json({ message: "Welcome to school-manager application." });
 });
 
 require("./app/api/class.js")(app);
