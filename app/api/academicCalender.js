@@ -61,7 +61,7 @@ module.exports = (app) => {
     app.post("/api/calender/delete", authenticateToken, (req, res) => {
         var id = req.query.id;
 
-        var sql = `delete from academic_calendar where id=${id}`;
+        var sql = `delete from academic_calendar where id="${id}"`;
         con.query(sql, function (err, result, fields) {
             if (err) throw err;
             res.send(result);

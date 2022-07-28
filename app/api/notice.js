@@ -37,7 +37,7 @@ module.exports = (app) => {
       res.send(result);
     });
   });
-  app.get("/api/notice/creator", authenticateToken, (req, res) => {
+  app.get("/api/notice/creator", (req, res) => {
     var sql = `select notice.id, notice.school_info_id, session.session_year, notice.section_id, class.class_name,  notice.notice_headline, notice.notice_description, notice.publishing_date
     from notice
     join class on notice.class_id=class.id 
@@ -46,6 +46,15 @@ module.exports = (app) => {
     where notice.user_code="${req.query.uid}"
     order by notice.id
     ;`;
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+  app.post("/api/notice/delete", authenticateToken, (req, res) => {
+    var id = req.query.id;
+
+    var sql = `delete from notice where id="${id}"`;
     con.query(sql, function (err, result, fields) {
       if (err) throw err;
       res.send(result);

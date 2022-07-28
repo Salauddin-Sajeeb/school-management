@@ -183,4 +183,25 @@ module.exports = (app) => {
       res.json({ status: "success" });
     });
   });
+  app.post("/api/routine/update", authenticateToken, (req, res) => {
+    var id = req.query.id;
+
+    var sql = `update  routine where 
+    $SET 
+    
+    `;
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+  app.post("/api/routine/delete", authenticateToken, (req, res) => {
+    var id = req.query.id;
+
+    var sql = `delete from routine where id=${id}`;
+    con.query(sql, function (err, result, fields) {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
 };

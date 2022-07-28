@@ -53,7 +53,7 @@ module.exports = (app) => {
         });
     });
 
-    app.post("/api/add_teacher", (req, res) => {
+    app.post("/api/add_teacher", authenticateToken, (req, res) => {
         var teacher_code = req.body.teacher_code;
         var title = req.body.title;
         var first_name = req.body.first_name;
@@ -77,6 +77,20 @@ module.exports = (app) => {
         con.query(sql, function (err, result, fields) {
             if (err) throw err;
             res.json({ status: "success" });
+        });
+    });
+    app.get("/api/sector/all", (req, res) => {
+        con.query("SELECT * FROM sector", function (err, result, fields) {
+            if (err) throw err;
+            res.send(result);
+        });
+    });
+    app.post("/api/add_sector", (req, res) => {
+        var sector_name = req.body.sector_name;
+        var sector_code = req.body.sector_code;
+        con.query(`insert into sector (sector_name,sector_code) values("${sector_name}","${sector_code}")`, function (err, result, fields) {
+            if (err) throw err;
+            res.send(result);
         });
     });
     app.post("/api/add_student", (req, res) => {
