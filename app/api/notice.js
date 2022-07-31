@@ -44,7 +44,7 @@ module.exports = (app) => {
     join section on notice.section_id=section.id
     join session on notice.session_id=session.id
     where notice.user_code="${req.query.uid}"
-    order by notice.id
+    order by notice.id 
     ;`;
     con.query(sql, function (err, result, fields) {
       if (err) throw err;
