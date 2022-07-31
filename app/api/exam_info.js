@@ -34,7 +34,7 @@ module.exports = (app) => {
         );
     });
     app.get("/api/exam_info_check", authenticateToken, (req, res) => {
-        var sql = "select  from exam_name";
+        var sql = "select *  from exam_name";
         con.query(
             sql,
             function (err, result, fields) {
