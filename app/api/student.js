@@ -66,7 +66,7 @@ module.exports = (app) => {
     });
   });
   app.get("/api/division", authenticateToken, (req, res) => {
-    con.query("SELECT * FROM division", function (err, result, fields) {
+    con.query("SELECT * FROM divisions", function (err, result, fields) {
       if (err) throw err;
       res.send(result);
     });
